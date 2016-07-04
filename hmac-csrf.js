@@ -27,7 +27,7 @@ module.exports = function(options) {
 
     var sessionId = extractSessionId(sessionCookie, req, res);
 
-    if('GET' == req.method) {
+    if('GET' == req.method || (req.method == 'POST' && req.body.AccountNumber && req.originalUrl == '/case/new')) {
       if(res[templateResponseAttr]) {
         res[templateResponseAttr]._csrf = generateCSRF(secret, algorithm, validityDelay, sessionId);
       }
